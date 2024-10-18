@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <a href="{% url 'task_create' %}">Criar Nova Tarefa</a>
+    <ul>
+        {% for task in tasks %}
+        <li>
+           <p><strong>{{task.title}}</strong> - {{task.description}}</p>
+           {%if task.completed%} (Completed)
+           {% else %} (Pendent)
+           {% endif %}
+           <br>
+           <a href="{% url 'task_edit' task.id%}">Edit</a>
+           <a href="{% url 'task_delete' task.id%}">Remove</a>
+        </li>
+        {% empty %}
+            <p>No task has been found! :(</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
